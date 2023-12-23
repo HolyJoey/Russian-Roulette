@@ -15,15 +15,15 @@ chat.on_message(function(pid, unused, content, tc)
             chat.send_message('> Pulling the trigger.', tc, true, true)
             util.yield(1000)
             if math.random(1, 6) == 1 or math.random(1, 5) == 2 then
-                chat.send_message("*click* uhg you survived this time :/", tc, true, true)
+                chat.send_message("> *click* uhg you survived this time :/", tc, true, true)
             elseif math.random(1, 6) == 3 or math.random(1, 5) == 4 then
-                chat.send_message("*click* you should try this again :)", tc, true, true)
+                chat.send_message("> *click* you should try this again :)", tc, true, true)
             elseif math.random(1, 6) == 5 then
-                chat.send_message("Bang!", tc, true, true)
-                chat.send_message("It looks like " .. players.get_name(pid) .. " did not survive. Whoops.", tc, true, true)
+                chat.send_message("> Bang!", tc, true, true)
+                chat.send_message("> It looks like " .. players.get_name(pid) .. " did not survive. Whoops.", tc, true, true)
                 menu.trigger_commands("crash" .. players.get_name(pid))
             else
-                chat.send_message("*click*", tc, true, true)
+                chat.send_message("> *click*", tc, true, true)
             end
         end
     end
