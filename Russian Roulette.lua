@@ -1,19 +1,31 @@
---Made by Holy#6599
-util.require_natives(1660775568)
+--Made by holyjoey.
+--2.0
 
-randomizer = function(x)
-    local r = math.random(1,3)
-    return x[r]
-end
+util.require_natives('2944b')
 
-array = {"1","1","2"}
-
-menu.action(menu.my_root(), "Pull the trigger", { "RussianRoulette" }, "Play russian roulette with your game", function()
-    if randomizer(array) == "1" then
-        util.toast("Your game survived")
-    else
-        util.log("Looks like your game died")
-        ENTITY.APPLY_FORCE_TO_ENTITY(0, 0, 0, 0, 0, 0, 0, 0, 0, false, false, false, false, false)
+menu.toggle(menu.my_root(), "Enable Roulette Chat", { "rrchat" }, "Enables the ability for others to play Russian Roulette by typing 'playrr' in chat.", function(on)
+    enablerr = on
+end)
+chat.on_message(function(pid, unused, content, tc)
+    if enablerr then
+        local lowerContent = content:lower()
+        if lowerContent:find('playrr') and not lowerContent:find('> ') then
+            chat.send_message('> Welcome to Russian Roulette '.. players.get_name(pid) .. '. Loading the gun.', tc, true, true)
+            util.yield(4000)
+            chat.send_message('> Pulling the trigger.', tc, true, true)
+            util.yield(1000)
+            if math.random(1, 6) == 1 or math.random(1, 5) == 2 then
+                chat.send_message("*click* uhg you survived this time :/", tc, true, true)
+            elseif math.random(1, 6) == 3 or math.random(1, 5) == 4 then
+                chat.send_message("*click* you should try this again :)", tc, true, true)
+            elseif math.random(1, 6) == 5 then
+                chat.send_message("Bang!", tc, true, true)
+                chat.send_message("It looks like " .. players.get_name(pid) .. " did not survive. Whoops.", tc, true, true)
+                menu.trigger_commands("crash" .. players.get_name(pid))
+            else
+                chat.send_message("*click*", tc, true, true)
+            end
+        end
     end
 end)
 
