@@ -1,5 +1,5 @@
 --Made by holyjoey.
---2.2
+--2.2.1
 
 util.require_natives('2944b')
 
@@ -31,7 +31,7 @@ chat.on_message(function(pid, unused, content, tc)
 end)
 
 menu.action(menu.my_root(), "Announce In Chat", { "announcerr" }, "Announce in chat that Russian Roulette has been enabled.", function()
-    chat.send_message('> Russian Roulette has been enabled. Play by typing "rrplay".', tc, true, true)
+    chat.send_message('> Russian Roulette has been enabled. Play by typing "playrr".', tc, true, true)
 end)
 
 util.keep_running()
